@@ -10,5 +10,10 @@ downcase_alphabet = {
 p downcase_alphabet['d']
 
 def caesar_cipher(string, shift_factor)
-
+    array_of_strings = string.split('')
+    array_of_strings.map do |element|
+        element.upcase
+    end
 end
+
+p caesar_cipher('a', 3)
