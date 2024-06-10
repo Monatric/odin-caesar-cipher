@@ -32,9 +32,15 @@ def caesar_cipher(string, shift_factor)
     array_of_strings = string.split('')
     substituted_letters = array_of_strings.map do |element|
         shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
-        DOWNCASE_ALPHABET.key(shift_sum)
+        if shift_sum > 26
+            shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
+            p shift_sum
+            DOWNCASE_ALPHABET.key(shift_sum)
+        else
+            DOWNCASE_ALPHABET.key(shift_sum)
+        end
     end
     result = substituted_letters.join
 end
-
-p caesar_cipher('abg', 2)
+# obj 3 next
+p caesar_cipher('what', 5)

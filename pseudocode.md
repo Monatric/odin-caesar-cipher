@@ -11,8 +11,9 @@ obj 1: to convert a simple "a", "b", "c", to an x shift factor (right)
 
 obj 2: to wrap from "z" to "a"
     1. if shift_sum is over 26,
-        make the shift_sum to 1
-        add the shift_factor to it
+        add DOWNCASE_ALPHABET[element] to shift_factor
+        the sum is subtracted to 26
+        that is the shift_sum
 
 
 obj 3: how to keep the same case
