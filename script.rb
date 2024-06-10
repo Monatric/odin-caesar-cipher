@@ -1,4 +1,4 @@
-downcase_alphabet = {
+DOWNCASE_ALPHABET = {
     'a' => 1,
     'b' => 2,
     'c' => 3,
@@ -7,13 +7,15 @@ downcase_alphabet = {
     'f' => 6,
     'g' => 7
 }
-p downcase_alphabet['d']
+# p DOWNCASE_ALPHABET['d']
 
 def caesar_cipher(string, shift_factor)
     array_of_strings = string.split('')
-    array_of_strings.map do |element|
-        element.upcase
+    substituted_letters = array_of_strings.map do |element|
+        shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
+        DOWNCASE_ALPHABET.key(shift_sum)
     end
+    result = substituted_letters.join
 end
 
-p caesar_cipher('a', 3)
+p caesar_cipher('abg', 2)
