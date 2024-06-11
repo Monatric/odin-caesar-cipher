@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 DOWNCASE_ALPHABET = {
     'a' => 1,
     'b' => 2,
@@ -31,16 +33,28 @@ DOWNCASE_ALPHABET = {
 def caesar_cipher(string, shift_factor)
     array_of_strings = string.split('')
     substituted_letters = array_of_strings.map do |element|
-        shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
-        if shift_sum > 26
-            shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
-            p shift_sum
-            DOWNCASE_ALPHABET.key(shift_sum)
+        if element == element.upcase
+            downcase_letter = element.downcase
+            shift_sum = DOWNCASE_ALPHABET[downcase_letter] + shift_factor
+            if shift_sum > 26
+                shift_sum = (DOWNCASE_ALPHABET[downcase_letter] + shift_factor) - 26
+                p shift_sum
+                DOWNCASE_ALPHABET.key(shift_sum)
+            end
+            element.upcase
         else
+            shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
+                if shift_sum > 26
+        
+                    shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
+                    p shift_sum
+                    DOWNCASE_ALPHABET.key(shift_sum)
+                end
+
             DOWNCASE_ALPHABET.key(shift_sum)
         end
     end
     result = substituted_letters.join
 end
 # obj 3 next
-p caesar_cipher('what', 5)
+p caesar_cipher('Whatastring', 5)
