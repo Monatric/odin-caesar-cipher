@@ -17,6 +17,10 @@ obj 2: to wrap from "z" to "a"
 
 
 obj 3: how to keep the same case
-
+    1. if element is upcase
+        change to downcase temporarily
+        proceed with the algo of obj 2
+        change to upcase
+        return that final letter
 
 obj 4: characters other than the alphabet are ignored
