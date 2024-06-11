@@ -24,3 +24,5 @@ obj 3: how to keep the same case
         return that final letter
 
 obj 4: characters other than the alphabet are ignored
+    1. if element is not a key in the hash
+        just return that element
