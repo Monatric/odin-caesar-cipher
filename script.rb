@@ -33,27 +33,30 @@ DOWNCASE_ALPHABET = {
 def caesar_cipher(string, shift_factor)
     array_of_strings = string.split('')
     substituted_letters = array_of_strings.map do |element|
-        if element == element.upcase
-            downcase_letter = element.downcase
-            shift_sum = DOWNCASE_ALPHABET[downcase_letter] + shift_factor
-            if shift_sum > 26
-                shift_sum = (DOWNCASE_ALPHABET[downcase_letter] + shift_factor) - 26
-                p shift_sum
-                DOWNCASE_ALPHABET.key(shift_sum).upcase
-            end
+        if element.match?(/[a-zA-Z]/) == false
+            element
         else
-            shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
+            if element == element.upcase
+                downcase_letter = element.downcase
+                shift_sum = DOWNCASE_ALPHABET[downcase_letter] + shift_factor
                 if shift_sum > 26
-        
-                    shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
+                    shift_sum = (DOWNCASE_ALPHABET[downcase_letter] + shift_factor) - 26
                     p shift_sum
-                    DOWNCASE_ALPHABET.key(shift_sum)
+                    DOWNCASE_ALPHABET.key(shift_sum).upcase
                 end
-
-            DOWNCASE_ALPHABET.key(shift_sum)
+            else
+                shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
+                    if shift_sum > 26
+            
+                        shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
+                        p shift_sum
+                        DOWNCASE_ALPHABET.key(shift_sum)
+                    end
+                DOWNCASE_ALPHABET.key(shift_sum)
+            end
         end
     end
     result = substituted_letters.join
 end
 # obj 3 next
-p caesar_cipher('Whatastring', 5)
+p caesar_cipher('What a st2ring!', 5)
