@@ -39,9 +39,8 @@ def caesar_cipher(string, shift_factor)
             if shift_sum > 26
                 shift_sum = (DOWNCASE_ALPHABET[downcase_letter] + shift_factor) - 26
                 p shift_sum
-                DOWNCASE_ALPHABET.key(shift_sum)
+                DOWNCASE_ALPHABET.key(shift_sum).upcase
             end
-            element.upcase
         else
             shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
                 if shift_sum > 26
