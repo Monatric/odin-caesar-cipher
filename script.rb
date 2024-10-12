@@ -49,12 +49,9 @@ end
 
 def substitute_letter(element, shift_factor)
   shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
+  shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26 if shift_sum > 26
   result = DOWNCASE_ALPHABET.key(shift_sum)
-  return result unless shift_sum > 26
-
-  # if the sum goes over the max value in the hash
-  shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
-  DOWNCASE_ALPHABET.key(shift_sum)
+  result unless shift_sum > 26
 end
 
 def alphabet?(element)
