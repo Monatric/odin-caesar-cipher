@@ -1,4 +1,4 @@
-require "pry-byebug"
+# require "pry-byebug"
 
 DOWNCASE_ALPHABET = {
   "a" => 1,
@@ -28,38 +28,34 @@ DOWNCASE_ALPHABET = {
   "y" => 25,
   "z" => 26
 }
-# p DOWNCASE_ALPHABET['d']
 
 def caesar_cipher(string, shift_factor)
   strings = string.chars
-  substitute_letters(strings, shift_factor).join
+  result = ""
+  strings.map do |element|
+    unless alphabet?(element)
+      result << element
+      next
+    end
 
-  # result = substituted_letters.join
+    element.downcase! if element == element.upcase
+    result << substitute_letters(element, shift_factor)
+  end
+  result
 end
 
-def substitute_letters(strings, shift_factor)
-  substituted_letters = strings.map do |element|
-    if element.match?(/[a-zA-Z]/) == false
-      element
-    elsif element == element.upcase
-      downcase_letter = element.downcase
-      shift_sum = DOWNCASE_ALPHABET[downcase_letter] + shift_factor
-      if shift_sum > 26
-        shift_sum = (DOWNCASE_ALPHABET[downcase_letter] + shift_factor) - 26
-        # p shift_sum
-        DOWNCASE_ALPHABET.key(shift_sum).upcase
-      end
-    else
-      shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
-      if shift_sum > 26
+def substitute_letters(element, shift_factor)
+  shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
+  result = DOWNCASE_ALPHABET.key(shift_sum)
+  return result unless shift_sum > 26
 
-        shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
-        # p shift_sum
-        DOWNCASE_ALPHABET.key(shift_sum)
-      end
-      DOWNCASE_ALPHABET.key(shift_sum)
-    end
-  end
+  # if the sum goes over the max value in the hash
+  shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26
+  DOWNCASE_ALPHABET.key(shift_sum)
+end
+
+def alphabet?(element)
+  element.match?(/[a-zA-Z]/)
 end
 
 p caesar_cipher("What a st2ring!", 5)
