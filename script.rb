@@ -37,14 +37,17 @@ def caesar_cipher(string, shift_factor)
       result << element
       next
     end
-
-    element.downcase! if element == element.upcase
-    result << substitute_letters(element, shift_factor)
+    if element == element.upcase
+      element.downcase!
+      result << substitute_letter(element, shift_factor).upcase
+    else
+      result << substitute_letter(element, shift_factor)
+    end
   end
   result
 end
 
-def substitute_letters(element, shift_factor)
+def substitute_letter(element, shift_factor)
   shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
   result = DOWNCASE_ALPHABET.key(shift_sum)
   return result unless shift_sum > 26
