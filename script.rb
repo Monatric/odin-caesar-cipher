@@ -31,31 +31,28 @@ DOWNCASE_ALPHABET = {
 
 def caesar_cipher(string, shift_factor)
   strings = string.chars
-  result = ""
-  strings.map do |element|
-    unless alphabet?(element)
-      result << element
-      next
-    end
-    if element == element.upcase
-      element.downcase!
-      result << substitute_letter(element, shift_factor).upcase
+  translate_strings(strings, shift_factor)
+end
+
+def translate_strings(strings, shift_factor)
+  strings.each_with_object("") do |element, result|
+    if alphabet?(element)
+      translated = substitute_letter(element.downcase, shift_factor)
+      result << (element == element.upcase ? translated.upcase : translated)
     else
-      result << substitute_letter(element, shift_factor)
+      result << element
     end
   end
-  result
 end
 
 def substitute_letter(element, shift_factor)
   shift_sum = DOWNCASE_ALPHABET[element] + shift_factor
   shift_sum = (DOWNCASE_ALPHABET[element] + shift_factor) - 26 if shift_sum > 26
-  result = DOWNCASE_ALPHABET.key(shift_sum)
-  result unless shift_sum > 26
+  DOWNCASE_ALPHABET.key(shift_sum)
 end
 
 def alphabet?(element)
   element.match?(/[a-zA-Z]/)
 end
 
-p caesar_cipher("What a st2ring!", 5)
+p caesar_cipher("Hello World!", 1)
